@@ -1,0 +1,129 @@
+date,amount,category,description
+2026-02-01 08:00:00,3000.0,income,Monthly Salary
+2026-02-01 16:00:00,22.5,food and drink,GrabFood
+2026-02-01 10:00:00,131.1,uncategorized,Misc
+2026-02-01 11:00:00,140.75,subscription,iCloud
+2026-02-01 18:00:00,60.16,investment,Bond fund
+2026-02-02 16:00:00,119.49,uncategorized,Misc
+2026-02-02 19:00:00,135.02,subscription,Spotify
+2026-02-02 15:00:00,128.54,subscription,YouTube Premium
+2026-02-02 13:00:00,87.4,investment,Gold savings
+2026-02-02 15:00:00,64.32,food and drink,Lunch
+2026-02-03 19:00:00,19.94,food and drink,GrabFood
+2026-02-03 21:00:00,121.22,subscription,iCloud
+2026-02-03 11:00:00,66.28,food and drink,GrabFood
+2026-02-03 16:00:00,70.15,investment,Crypto
+2026-02-03 21:00:00,49.05,investment,Crypto
+2026-02-04 14:00:00,41.04,subscription,iCloud
+2026-02-04 14:00:00,107.78,uncategorized,Misc
+2026-02-04 19:00:00,86.35,uncategorized,Misc
+2026-02-04 21:00:00,128.14,food and drink,GrabFood
+2026-02-04 17:00:00,53.31,subscription,Netflix
+2026-02-05 13:00:00,64.63,investment,Crypto
+2026-02-05 11:00:00,101.39,uncategorized,ATM Withdrawal
+2026-02-05 12:00:00,112.6,subscription,Adobe
+2026-02-05 16:00:00,113.66,investment,Crypto
+2026-02-05 17:00:00,84.13,food and drink,GrabFood
+2026-02-06 17:00:00,113.98,uncategorized,ATM Withdrawal
+2026-02-06 15:00:00,48.57,subscription,YouTube Premium
+2026-02-06 10:00:00,108.26,investment,Crypto
+2026-02-06 20:00:00,128.0,food and drink,Lunch
+2026-02-06 20:00:00,22.83,uncategorized,Transfer
+2026-02-06 13:00:00,128.79,subscription,iCloud
+2026-02-07 15:00:00,148.51,uncategorized,Misc
+2026-02-07 14:00:00,50.21,investment,Bond fund
+2026-02-07 21:00:00,25.69,uncategorized,Misc
+2026-02-07 09:00:00,500.0,income,Freelance Project
+2026-02-07 14:00:00,107.66,uncategorized,ATM Withdrawal
+2026-02-07 15:00:00,110.58,investment,Gold savings
+2026-02-07 19:00:00,14.29,food and drink,Starbucks
+2026-02-08 17:00:00,27.84,food and drink,GrabFood
+2026-02-08 14:00:00,93.18,uncategorized,Misc
+2026-02-08 13:00:00,116.21,investment,Crypto
+2026-02-08 09:00:00,500.0,income,Freelance Project
+2026-02-08 14:00:00,135.33,investment,Bond fund
+2026-02-08 10:00:00,94.11,uncategorized,Misc
+2026-02-09 14:00:00,65.24,food and drink,Groceries
+2026-02-09 11:00:00,52.7,investment,Crypto
+2026-02-10 21:00:00,47.56,uncategorized,Misc
+2026-02-10 11:00:00,30.21,investment,Bond fund
+2026-02-11 20:00:00,62.48,uncategorized,Transfer
+2026-02-11 09:00:00,500.0,income,Freelance Project
+2026-02-11 17:00:00,77.85,food and drink,Lunch
+2026-02-11 11:00:00,26.67,food and drink,Starbucks
+2026-02-11 18:00:00,124.83,uncategorized,ATM Withdrawal
+2026-02-11 18:00:00,122.83,investment,Gold savings
+2026-02-12 10:00:00,13.1,investment,Stock purchase
+2026-02-12 16:00:00,143.19,subscription,Adobe
+2026-02-13 09:00:00,500.0,income,Freelance Project
+2026-02-13 10:00:00,50.72,uncategorized,ATM Withdrawal
+2026-02-13 11:00:00,42.01,food and drink,Lunch
+2026-02-13 20:00:00,104.41,food and drink,Lunch
+2026-02-14 18:00:00,71.89,uncategorized,ATM Withdrawal
+2026-02-14 13:00:00,28.04,investment,Gold savings
+2026-02-14 10:00:00,74.82,subscription,Spotify
+2026-02-14 18:00:00,123.48,subscription,Adobe
+2026-02-14 09:00:00,500.0,income,Freelance Project
+2026-02-14 17:00:00,128.73,uncategorized,Misc
+2026-02-15 18:00:00,108.79,food and drink,Dinner
+2026-02-15 18:00:00,56.87,investment,Crypto
+2026-02-15 18:00:00,121.04,uncategorized,Transfer
+2026-02-15 13:00:00,38.18,subscription,Netflix
+2026-02-16 20:00:00,96.76,food and drink,Lunch
+2026-02-16 09:00:00,500.0,income,Freelance Project
+2026-02-16 19:00:00,96.47,food and drink,Groceries
+2026-02-16 15:00:00,82.14,investment,Bond fund
+2026-02-16 13:00:00,93.32,food and drink,Starbucks
+2026-02-16 14:00:00,14.46,food and drink,Dinner
+2026-02-16 15:00:00,18.04,subscription,Spotify
+2026-02-17 13:00:00,129.85,uncategorized,Misc
+2026-02-17 10:00:00,41.7,food and drink,Starbucks
+2026-02-17 09:00:00,500.0,income,Freelance Project
+2026-02-17 10:00:00,122.78,subscription,Adobe
+2026-02-17 15:00:00,39.65,food and drink,Dinner
+2026-02-17 13:00:00,59.98,investment,Stock purchase
+2026-02-18 10:00:00,101.83,subscription,Netflix
+2026-02-18 12:00:00,18.88,investment,Stock purchase
+2026-02-19 21:00:00,147.85,subscription,Adobe
+2026-02-19 09:00:00,500.0,income,Freelance Project
+2026-02-19 11:00:00,101.72,food and drink,Lunch
+2026-02-19 14:00:00,29.02,subscription,YouTube Premium
+2026-02-20 17:00:00,77.6,food and drink,GrabFood
+2026-02-20 20:00:00,111.97,investment,Gold savings
+2026-02-21 10:00:00,139.41,uncategorized,Transfer
+2026-02-21 09:00:00,500.0,income,Freelance Project
+2026-02-21 16:00:00,118.11,subscription,Netflix
+2026-02-21 18:00:00,34.78,food and drink,Starbucks
+2026-02-22 21:00:00,12.75,uncategorized,Misc
+2026-02-22 12:00:00,47.76,investment,Bond fund
+2026-02-22 16:00:00,10.43,uncategorized,Transfer
+2026-02-22 14:00:00,108.34,investment,Crypto
+2026-02-22 19:00:00,73.75,uncategorized,Misc
+2026-02-22 14:00:00,44.48,food and drink,GrabFood
+2026-02-23 16:00:00,58.41,food and drink,Groceries
+2026-02-23 09:00:00,500.0,income,Freelance Project
+2026-02-23 18:00:00,136.41,investment,Bond fund
+2026-02-23 10:00:00,35.22,food and drink,Lunch
+2026-02-24 20:00:00,137.13,subscription,Adobe
+2026-02-24 16:00:00,73.27,uncategorized,Misc
+2026-02-24 10:00:00,104.87,food and drink,Dinner
+2026-02-24 09:00:00,500.0,income,Freelance Project
+2026-02-24 12:00:00,147.01,uncategorized,Transfer
+2026-02-25 11:00:00,101.76,investment,Gold savings
+2026-02-25 20:00:00,137.58,investment,Crypto
+2026-02-26 16:00:00,114.39,food and drink,Dinner
+2026-02-26 13:00:00,18.51,food and drink,Starbucks
+2026-02-26 09:00:00,500.0,income,Freelance Project
+2026-02-26 12:00:00,117.16,investment,Gold savings
+2026-02-27 10:00:00,147.11,uncategorized,Misc
+2026-02-27 20:00:00,113.05,investment,Crypto
+2026-02-27 15:00:00,106.32,investment,Crypto
+2026-02-27 19:00:00,54.12,food and drink,Starbucks
+2026-02-27 09:00:00,500.0,income,Freelance Project
+2026-02-27 21:00:00,90.07,uncategorized,Misc
+2026-02-27 10:00:00,105.67,food and drink,Starbucks
+2026-02-28 10:00:00,46.31,investment,Gold savings
+2026-02-28 17:00:00,143.65,subscription,Adobe
+2026-02-28 21:00:00,66.83,subscription,iCloud
+2026-02-28 09:00:00,500.0,income,Freelance Project
+2026-02-28 15:00:00,119.6,subscription,Spotify
