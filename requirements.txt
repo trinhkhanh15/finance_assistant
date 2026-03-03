@@ -10,3 +10,17 @@ python-dotenv>=1.0.0
 torch>=2.0.0
 torchvision>=0.15.0
 torchaudio>=2.0.0
+
+fastapi
+pydantic
+sqlalchemy
+uvicorn
+bcrypt==4.0.1
+python-multipart
+pyjwt
+cryptography
+logging
+greenlet
+pandas
+asyncpg
+passlib
