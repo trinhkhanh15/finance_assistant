@@ -1,0 +1,65 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage[vietnamese]{babel}
+
+
+\geometry{margin=1in}
+
+\title{Financial Preference Weight Engineering Report}
+\author{}
+\date{}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red}
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Feature Specification}
+
+\subsection{Demographic Features}
+\begin{itemize}
+    \item Age
+    \item Gender
+\end{itemize}
+
+\subsection{Financial State Features}
+\begin{itemize}
+    \item Income
+    \item Total Current Save
+    \item Total Target Save
+    \item Total Expense This Month
+    \item Days Remaining (target day for nearest target saving - current day)
+    \item Trading Hours
+\end{itemize}
+
+\subsection{Historical Expense Features (last 4 Months, include current month)}
+For each month:
+\begin{itemize}
+    \item Total Expense
+    \item Total Expense for Each Category (Amount
+    \item Total Payments for Each Category (Frequency)
+\end{itemize}
+
+\subsection{Transaction-Level Features}
+\begin{itemize}
+    \item Average Order Value
+    \item Median Order Value
+    \item Product Price
+    \item Product Category
+    \item Discount Percent (Promotional purchase affect emotion)
+\end{itemize}
+
+\end{document}

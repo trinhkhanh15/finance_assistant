@@ -9,6 +9,7 @@ import { DashboardPage } from '@/features/dashboard/pages/DashboardPage'
 import { TransactionsPage } from '@/features/transactions/pages/TransactionsPage'
 import { SavingPage } from '@/features/saving/pages/SavingPage'
 import { SubscriptionsPage } from '@/features/subscriptions/pages/SubscriptionsPage'
+import { BudgetPage } from '@/features/budget/pages/BudgetPage'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -59,6 +60,16 @@ function App() {
               <ProtectedRoute>
                 <AppLayout>
                   <SubscriptionsPage />
+                </AppLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/budget"
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <BudgetPage />
                 </AppLayout>
               </ProtectedRoute>
             }

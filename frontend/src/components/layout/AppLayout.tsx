@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, PiggyBank, Receipt, CreditCard, LogOut, Wallet } from 'lucide-react'
+import { LayoutDashboard, PiggyBank, Receipt, CreditCard, LogOut, Wallet, Banknote } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuthStore } from '@/store/auth-store'
 import { useBalance } from '@/features/auth/hooks/use-auth'
@@ -10,6 +10,7 @@ const navItems = [
   { to: '/transactions', label: 'Transactions', icon: Receipt },
   { to: '/savings', label: 'Savings', icon: PiggyBank },
   { to: '/subscriptions', label: 'Subscriptions', icon: CreditCard },
+  { to: '/budget', label: 'Budget', icon: Banknote },
 ]
 
 export function AppLayout({ children }: { children: React.ReactNode }) {

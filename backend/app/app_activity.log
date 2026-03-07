@@ -1781,3 +1781,18 @@ DETAIL:  Key (subscription_id)=(0) is not present in table "subscription".
 2026/03/05 08:22:17 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=2
 2026/03/05 08:26:27 - ERROR - Transaction ID=176 for user ID=2 failed: insufficient balance
 2026/03/05 08:26:27 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=2
+2026/03/07 16:36:41 - INFO - Created saving target ID=1 for user ID=1 successfully
+2026/03/07 16:41:04 - ERROR - Transaction ID=1 for user ID=1 failed: insufficient balance
+2026/03/07 16:43:57 - INFO - Created transaction ID=2 for user ID=1 successfully
+2026/03/07 16:45:16 - INFO - Created transaction ID=3 for user ID=1 successfully
+2026/03/07 16:45:16 - INFO - Deposit to target ID=1 for user ID=1 successfully.
+2026/03/07 17:23:47 - ERROR - Transaction ID=4 for user ID=1 failed: insufficient balance
+2026/03/07 17:26:47 - ERROR - Transaction ID=5 for user ID=1 failed: insufficient balance
+2026/03/07 17:26:59 - INFO - Created transaction ID=6 for user ID=1 successfully
+2026/03/07 17:27:20 - INFO - Created transaction ID=7 for user ID=1 successfully
+2026/03/07 17:28:17 - INFO - Created transaction ID=8 for user ID=1 successfully
+2026/03/07 17:28:31 - INFO - Created transaction ID=9 for user ID=1 successfully
+2026/03/07 17:29:00 - INFO - Created transaction ID=10 for user ID=1 successfully
+2026/03/07 17:29:19 - INFO - Created transaction ID=11 for user ID=1 successfully
+2026/03/07 18:34:25 - INFO - Retrieved financial preference data for user 1
+2026/03/07 18:36:43 - INFO - Retrieved financial preference data for user 1

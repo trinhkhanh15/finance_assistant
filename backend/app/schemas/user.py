@@ -19,3 +19,14 @@ class ShowUserTarget(BaseModel):
 
     class Config:
         from_attributes = True
+
+class SetBudget(BaseModel):
+    fad_budget: int
+    shopping_budget: int
+    investment_budget: int
+    moving_budget: int
+    entertainment_budget: int
+    other_budget: int
+
+    class Config:
+        from_attributes = True

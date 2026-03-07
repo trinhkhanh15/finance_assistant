@@ -20,7 +20,12 @@ export function useCreateTransaction() {
   return useMutation({
     mutationFn: (data: CreateTransactionRequest) =>
       transactionApi.manual(data).then((r) => r.data),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      // Check if response indicates insufficient balance
+      if (data.description?.toLowerCase() === 'insufficient_balance') {
+        toast({ title: 'Your balance is not enough for this transaction', variant: 'destructive' })
+        return
+      }
       queryClient.invalidateQueries({ queryKey: keys.uncategorized })
       toast({ title: 'Transaction added successfully', variant: 'success' })
     },
