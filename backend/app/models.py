@@ -9,7 +9,16 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True, index=True)
     password = Column(String)
+    age = Column(Integer)
+    sex = Column(String, default="Not want to say")
     balance = Column(Float, default=0.0)
+
+    fad_budget = Column(Integer)
+    shopping_budget = Column(Integer)
+    investment_budget = Column(Integer)
+    moving_budget = Column(Integer)
+    entertainment_budget = Column(Integer)
+    other_budget = Column(Integer)
 
     # Relationships
     transactions = relationship("Transaction", back_populates="owner")

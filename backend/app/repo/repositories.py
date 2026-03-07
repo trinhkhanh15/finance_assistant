@@ -31,11 +31,12 @@ class UserRepository(BaseRepository):
             return None
         return True
 
-
     async def create(self, user: sche_user.CreateUser):
         new_user = models.User(
             username=user.username,
             password=user.password,
+            age=user.age,
+            sex=user.sex
         )
         self.db.add(new_user)
         await self.db.commit()
@@ -83,6 +84,22 @@ class SavingRepository(BaseRepository):
             models.FinanceGoal.user_id == user_id
         ))
         return list_target.scalars().all()
+    
+    async def update_status(self, goal_id: int, status: str):
+        goal = await self.get_by_id(goal_id)
+        if not goal:
+            return None
+        goal.status = status
+        await self.db.commit()
+        await self.db.refresh(goal)
+        return goal
+    
+    async def get_add_saving_amount(self, user_id: int):
+        query = select(func.sum(models.FinanceGoal.current_amount)).filter(
+            models.FinanceGoal.user_id == user_id
+        )
+        result = await self.db.execute(query)
+        return result.scalar()
 
     async def update_current_amount(self, goal_id: int, amount: float):
         goal = await self.get_by_id(goal_id)

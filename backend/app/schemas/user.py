@@ -5,6 +5,8 @@ from typing import List
 class CreateUser(BaseModel):
     username: str
     password: str
+    age: int 
+    sex: str
 
 class User(BaseModel):
     username: str

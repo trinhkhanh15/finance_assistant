@@ -13,6 +13,8 @@ export interface LoginResponse {
 export interface SignupRequest {
   username: string
   password: string
+  age: number
+  sex: string
 }
 
 export interface UserResponse {
