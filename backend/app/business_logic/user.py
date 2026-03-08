@@ -37,10 +37,10 @@ async def show_budget(user_id: int, user_repo: UserRepository):
         log_activity(msg, "error")
         raise ValueError(msg)
     return {
-        "fad_budget": user.fad_budget,
-        "shopping_budget": user.shopping_budget,
-        "investment_budget": user.investment_budget,
-        "moving_budget": user.moving_budget,
-        "entertainment_budget": user.entertainment_budget,
-        "other_budget": user.other_budget,
+        "fad_budget": user.fad_budget or 0,
+        "shopping_budget": user.shopping_budget or 0,
+        "investment_budget": user.investment_budget or 0,
+        "moving_budget": user.moving_budget or 0,
+        "entertainment_budget": user.entertainment_budget or 0,
+        "other_budget": user.other_budget or 0,
     }

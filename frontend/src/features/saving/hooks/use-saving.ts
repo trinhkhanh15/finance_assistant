@@ -67,10 +67,21 @@ export function useDeposit() {
   return useMutation({
     mutationFn: ({ goalId, amount }: { goalId: number; amount: number }) =>
       savingApi.deposit(goalId, { amount }).then((r) => r.data),
-    onSuccess: () => {
+    onSuccess: (updatedGoal) => {
       queryClient.invalidateQueries({ queryKey: KEYS.current })
       queryClient.invalidateQueries({ queryKey: KEYS.all })
       queryClient.invalidateQueries({ queryKey: ['user', 'balance'] })
+
+      const isCompleted = updatedGoal?.status?.toLowerCase() === 'completed'
+      if (isCompleted) {
+        toast({
+          title: 'Congratulations! Goal completed',
+          description: `${updatedGoal.name} is now marked as completed.`,
+          variant: 'success',
+        })
+        return
+      }
+
       toast({ title: 'Deposit successful', variant: 'success' })
     },
     onError: (err: any) => {

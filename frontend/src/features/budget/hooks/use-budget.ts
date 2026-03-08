@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { budgetApi, type SetBudgetRequest, type SpendingData } from '../api'
+import { budgetApi, type SetBudgetRequest } from '../api'
 import { useToast } from '@/hooks/use-toast'
 
 const KEYS = {

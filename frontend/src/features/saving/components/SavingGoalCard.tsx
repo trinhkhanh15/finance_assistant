@@ -1,5 +1,5 @@
 import { useState, useId } from 'react'
-import { Wallet, TrendingUp, TrendingDown, X } from 'lucide-react'
+import { Wallet, TrendingUp, TrendingDown, X, CircleCheckBig } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import {
@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label'
 import { useDeposit, useWithdraw, useDeleteGoal } from '../hooks/use-saving'
 import { useToast } from '@/hooks/use-toast'
 import type { Target } from '../api'
+import { cn } from '@/lib/utils'
 
 function formatDate(d: string) {
   try {
@@ -46,6 +47,7 @@ export function SavingGoalCard({ goal }: SavingGoalCardProps) {
   const progress = goal.target_amount > 0
     ? Math.min(100, (goal.current_amount / goal.target_amount) * 100)
     : 0
+  const isCompleted = goal.status?.toLowerCase() === 'completed' || progress >= 100
 
   const handleDeposit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -86,7 +88,12 @@ export function SavingGoalCard({ goal }: SavingGoalCardProps) {
 
   return (
     <>
-      <Card className="relative">
+      <Card
+        className={cn(
+          'relative',
+          isCompleted && 'border-green-500/50 bg-green-50/40 dark:bg-green-950/20'
+        )}
+      >
         <Button
           variant="ghost"
           size="icon"
@@ -99,11 +106,24 @@ export function SavingGoalCard({ goal }: SavingGoalCardProps) {
         <CardHeader className="pb-2">
           <div className="flex items-start justify-between gap-2">
             <div className="flex items-center gap-2">
-              <div className="rounded-full bg-primary/10 p-2">
-                <Wallet className="h-4 w-4 text-primary" />
+              <div
+                className={cn(
+                  'rounded-full p-2',
+                  isCompleted ? 'bg-green-600/15' : 'bg-primary/10'
+                )}
+              >
+                <Wallet className={cn('h-4 w-4', isCompleted ? 'text-green-700 dark:text-green-400' : 'text-primary')} />
               </div>
               <div>
-                <h3 className="font-semibold">{goal.name}</h3>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-semibold">{goal.name}</h3>
+                  {isCompleted && (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-green-600/15 px-2 py-0.5 text-xs font-medium text-green-700 dark:text-green-400">
+                      <CircleCheckBig className="h-3.5 w-3.5" />
+                      Completed
+                    </span>
+                  )}
+                </div>
                 {goal.description && (
                   <p className="text-sm text-muted-foreground">{goal.description}</p>
                 )}
@@ -120,19 +140,28 @@ export function SavingGoalCard({ goal }: SavingGoalCardProps) {
           </div>
           <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
             <div
-              className="h-full bg-primary transition-all duration-300 rounded-full"
+              className={cn(
+                'h-full transition-all duration-300 rounded-full',
+                isCompleted ? 'bg-green-600' : 'bg-primary'
+              )}
               style={{ width: `${progress}%` }}
             />
           </div>
+          {isCompleted && (
+            <p className="text-xs font-medium text-green-700 dark:text-green-400">
+              Congratulations! You completed this saving goal.
+            </p>
+          )}
           <div className="flex gap-2">
             <Button
               variant="outline"
               size="sm"
               className="flex-1 gap-1"
               onClick={() => setDepositOpen(true)}
+              disabled={isCompleted}
             >
               <TrendingUp className="h-3.5 w-3.5" />
-              Deposit
+              {isCompleted ? 'Completed' : 'Deposit'}
             </Button>
             <Button
               variant="outline"
