@@ -62,11 +62,12 @@ async def withdraw(goal_id: int,
 
 @router.delete("/delete/{goal_id}", status_code=status.HTTP_200_OK)
 async def delete(goal_id: int,
-           saving_repo: SavingRepository = Depends(get_saving_repo),
-           current_user: Annotated[sche_user.User, Depends(get_current_user)] = None):
+                 user_repo: UserRepository = Depends(get_user_repo),
+                 saving_repo: SavingRepository = Depends(get_saving_repo),
+                 current_user: Annotated[sche_user.User, Depends(get_current_user)] = None):
     user_id = current_user.id
     try:
-        result = await delete_target(goal_id, user_id, saving_repo)
+        result = await delete_target(goal_id, user_id, user_repo, saving_repo)
         return result
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
