@@ -15,6 +15,20 @@ class BaseRepository:
         self.db = db
 
 class UserRepository(BaseRepository):
+    async def update_budget(self, user_id: int, budget_data: sche_user.SetBudget):
+        user = await self.get_by_id(user_id)
+        if not user:
+            return None
+        user.fad_budget = budget_data.fad_budget
+        user.shopping_budget = budget_data.shopping_budget
+        user.investment_budget = budget_data.investment_budget
+        user.moving_budget = budget_data.moving_budget
+        user.entertainment_budget = budget_data.entertainment_budget
+        user.other_budget = budget_data.other_budget
+        await self.db.commit()
+        await self.db.refresh(user)
+        return user
+
     async def get_by_id(self, user_id: int):
         user = await self.db.execute(select(models.User).filter(models.User.id == user_id))
         return user.scalars().first()
@@ -31,11 +45,12 @@ class UserRepository(BaseRepository):
             return None
         return True
 
-
     async def create(self, user: sche_user.CreateUser):
         new_user = models.User(
             username=user.username,
             password=user.password,
+            age=user.age,
+            sex=user.sex
         )
         self.db.add(new_user)
         await self.db.commit()
@@ -83,6 +98,43 @@ class SavingRepository(BaseRepository):
             models.FinanceGoal.user_id == user_id
         ))
         return list_target.scalars().all()
+    
+    async def update_status(self, goal_id: int, status: str):
+        goal = await self.get_by_id(goal_id)
+        if not goal:
+            return None
+        goal.status = status
+        await self.db.commit()
+        await self.db.refresh(goal)
+        return goal
+    
+    async def get_add_saving_amount(self, user_id: int):
+        query = select(func.sum(models.FinanceGoal.current_amount)).filter(
+            models.FinanceGoal.user_id == user_id
+        )
+        result = await self.db.execute(query)
+        return result.scalar() or 0
+
+    async def get_total_target_save(self, user_id: int):
+        query = select(func.sum(models.FinanceGoal.target_amount)).filter(
+            models.FinanceGoal.user_id == user_id
+        )
+        result = await self.db.execute(query)
+        return result.scalar() or 0
+
+    async def get_nearest_end_date(self, user_id: int):
+        from datetime import date as date_type
+        query = select(models.FinanceGoal.end_date).filter(
+            models.FinanceGoal.user_id == user_id,
+            models.FinanceGoal.end_date >= date_type.today(),
+            models.FinanceGoal.status != "Completed"
+        ).order_by(models.FinanceGoal.end_date).limit(1)
+        result = await self.db.execute(query)
+        end_date = result.scalar()
+        if end_date:
+            days_remaining = (end_date - date_type.today()).days
+            return max(0, days_remaining)
+        return 0
 
     async def update_current_amount(self, goal_id: int, amount: float):
         goal = await self.get_by_id(goal_id)
@@ -162,6 +214,7 @@ class TransactionRepository(BaseRepository):
             func.sum(models.Transaction.amount).label("total"),
         ).filter(
             models.Transaction.user_id == user_id,
+            models.Transaction.description != "INSUFFICIENT_BALANCE",
             func.date(models.Transaction.date) >= start_date,
             func.date(models.Transaction.date) <= end_date
         ).group_by(models.Transaction.category)
@@ -173,6 +226,7 @@ class TransactionRepository(BaseRepository):
     async def get_all_spending(self, user_id: int, start_date: date, end_date: date):
         spending_obj = await self.db.execute(select(func.sum(models.Transaction.amount)).filter(
             models.Transaction.user_id == user_id,
+            models.Transaction.description != "INSUFFICIENT_BALANCE",
             func.date(models.Transaction.date) >= start_date,
             func.date(models.Transaction.date) <= end_date,
             models.Transaction.category != "income"
@@ -188,7 +242,8 @@ class TransactionRepository(BaseRepository):
             models.Transaction.user_id == user_id,
             func.date(models.Transaction.date) >= start_date,
             func.date(models.Transaction.date) <= end_date,
-            models.Transaction.category != "income"
+            models.Transaction.category != "income",
+            models.Transaction.description != "INSUFFICIENT_BALANCE",
         ).group_by(
             func.date(models.Transaction.date)
         )
@@ -209,7 +264,8 @@ class TransactionRepository(BaseRepository):
                 models.Transaction.user_id == user_id,
                 func.date(models.Transaction.date) >= start_date,
                 func.date(models.Transaction.date) <= end_date,
-                models.Transaction.category != "income"
+                models.Transaction.category != "income",
+                models.Transaction.description != "INSUFFICIENT_BALANCE",
             )
             .group_by(week_label)
             .order_by("week_start")
@@ -218,6 +274,29 @@ class TransactionRepository(BaseRepository):
         result = await self.db.execute(spending_query)
         spending_map = {row.week_start.date(): row.total for row in result.all()}
         return spending_map
+
+    async def get_transaction_stats(self, user_id: int):
+        """Get average and median order value"""
+        query = select(models.Transaction.amount).filter(
+            models.Transaction.user_id == user_id,
+            models.Transaction.description != "INSUFFICIENT_BALANCE",
+            models.Transaction.category != "income"
+        ).order_by(models.Transaction.amount)
+        
+        result = await self.db.execute(query)
+        amounts = [row[0] for row in result.all()]
+        
+        if not amounts:
+            return {"average": 0, "median": 0}
+        
+        average = sum(amounts) / len(amounts)
+        
+        # Calculate median
+        sorted_amounts = sorted(amounts)
+        n = len(sorted_amounts)
+        median = (sorted_amounts[n // 2 - 1] + sorted_amounts[n // 2]) / 2 if n % 2 == 0 else sorted_amounts[n // 2]
+        
+        return {"average": average, "median": median}
 
 class SubscriptionRepository(BaseRepository):
     async def create(self, user_id: int, data: sche_subscription.CreateSubscription):

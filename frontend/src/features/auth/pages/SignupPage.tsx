@@ -11,15 +11,22 @@ export function SignupPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [age, setAge] = useState('')
+  const [sex, setSex] = useState('')
   const signup = useSignup()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!username.trim() || !password) return
+    if (!username.trim() || !password || !age || !sex) return
     if (password !== confirmPassword) {
       return
     }
-    signup.mutate({ username: username.trim(), password })
+    signup.mutate({ 
+      username: username.trim(), 
+      password,
+      age: parseInt(age),
+      sex 
+    })
   }
 
   const passwordsMatch = !confirmPassword || password === confirmPassword
@@ -78,10 +85,40 @@ export function SignupPage() {
                 <p className="text-xs text-destructive">Passwords do not match</p>
               )}
             </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <Label htmlFor="age">Age</Label>
+                <Input
+                  id="age"
+                  type="number"
+                  placeholder="25"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  disabled={signup.isPending}
+                  min="1"
+                  max="150"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="sex">Sex</Label>
+                <select
+                  id="sex"
+                  value={sex}
+                  onChange={(e) => setSex(e.target.value)}
+                  disabled={signup.isPending}
+                  className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground text-sm"
+                >
+                  <option value="">Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
             <Button
               type="submit"
               className="w-full"
-              disabled={signup.isPending || !passwordsMatch || !username.trim() || !password}
+              disabled={signup.isPending || !passwordsMatch || !username.trim() || !password || !age || !sex}
             >
               {signup.isPending ? 'Signing up...' : 'Sign up'}
               </Button>

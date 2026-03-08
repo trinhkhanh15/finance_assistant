@@ -22,3 +22,25 @@ async def get_balance(user_id: int, user_repo: UserRepository):
         raise ValueError(msg)
     return user.balance
 
+async def set_budget(user_id: int, budget_data: dict, user_repo: UserRepository):
+    updated_user = await user_repo.update_budget(user_id, budget_data)
+    if not updated_user:
+        msg = f"User with id {user_id} doesn't exist"
+        log_activity(msg, "error")
+        raise ValueError(msg)
+    return updated_user
+
+async def show_budget(user_id: int, user_repo: UserRepository):
+    user = await user_repo.get_by_id(user_id)
+    if not user:
+        msg = f"User with id {user_id} doesn't exist"
+        log_activity(msg, "error")
+        raise ValueError(msg)
+    return {
+        "fad_budget": user.fad_budget,
+        "shopping_budget": user.shopping_budget,
+        "investment_budget": user.investment_budget,
+        "moving_budget": user.moving_budget,
+        "entertainment_budget": user.entertainment_budget,
+        "other_budget": user.other_budget,
+    }

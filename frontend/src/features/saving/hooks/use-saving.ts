@@ -10,7 +10,7 @@ const KEYS = {
 export function useSavingGoals() {
   return useQuery({
     queryKey: KEYS.current,
-    queryFn: savingApi.getCurrent,
+    queryFn: savingApi.getAll,
   })
 }
 
@@ -21,6 +21,29 @@ export function useAllSavingGoals() {
   })
 }
 
+// Helper function to extract error message
+function getErrorMessage(
+  err: { response?: { data?: { detail?: string | string[]; message?: string } }; message?: string },
+  defaultMessage: string
+): string {
+  const data = err.response?.data as { detail?: string | string[]; message?: string } | undefined
+  
+  if (data?.detail) {
+    if (typeof data.detail === 'string') return data.detail
+    if (Array.isArray(data.detail)) {
+      const first = data.detail[0]
+      return typeof first === 'object' && first && 'msg' in first 
+        ? String((first as { msg: string }).msg) 
+        : String(first)
+    }
+  }
+  
+  if (typeof data?.message === 'string') return data.message
+  if (typeof err.message === 'string') return err.message
+  
+  return defaultMessage
+}
+
 export function useCreateGoal() {
   const queryClient = useQueryClient()
   const { toast } = useToast()
@@ -29,13 +52,11 @@ export function useCreateGoal() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: KEYS.current })
       queryClient.invalidateQueries({ queryKey: KEYS.all })
-      toast({ title: 'Goal created', variant: 'success' })
+      toast({ title: 'Goal created successfully', variant: 'success' })
     },
-    onError: (err: { response?: { data?: { detail?: string } } }) => {
-      toast({
-        title: (err.response?.data?.detail as string) || 'Failed to create goal',
-        variant: 'destructive',
-      })
+    onError: (err: any) => {
+      const message = getErrorMessage(err, 'Failed to create goal')
+      toast({ title: message, variant: 'destructive' })
     },
   })
 }
@@ -52,11 +73,9 @@ export function useDeposit() {
       queryClient.invalidateQueries({ queryKey: ['user', 'balance'] })
       toast({ title: 'Deposit successful', variant: 'success' })
     },
-    onError: (err: { response?: { data?: { detail?: string } } }) => {
-      toast({
-        title: (err.response?.data?.detail as string) || 'Deposit failed',
-        variant: 'destructive',
-      })
+    onError: (err: any) => {
+      const message = getErrorMessage(err, 'Deposit failed')
+      toast({ title: message, variant: 'destructive' })
     },
   })
 }
@@ -73,23 +92,13 @@ export function useWithdraw() {
       queryClient.invalidateQueries({ queryKey: ['user', 'balance'] })
       toast({ title: 'Withdrawal successful', variant: 'success' })
     },
-    onError: (err: { response?: { data?: { detail?: string | string[]; message?: string } }; message?: string }) => {
-      const data = err.response?.data as { detail?: string | string[]; message?: string } | undefined
-      let message = 'Withdrawal failed'
-      if (data) {
-        if (typeof data.detail === 'string') message = data.detail
-        else if (Array.isArray(data.detail)) {
-          const first = data.detail[0]
-          message = typeof first === 'object' && first && 'msg' in first ? String((first as { msg: string }).msg) : String(first)
-        } else if (typeof data.message === 'string') message = data.message
-      }
-      if (message.toLowerCase().includes('does not have enough amount')) {
-        message = 'This goal does not have enough amount to withdraw.'
-      }
+    onError: (err: any) => {
+      const message = getErrorMessage(err, 'Withdrawal failed')
       toast({ title: message, variant: 'destructive' })
     },
   })
 }
+
 
 export function useDeleteGoal() {
   const queryClient = useQueryClient()
@@ -99,13 +108,11 @@ export function useDeleteGoal() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: KEYS.current })
       queryClient.invalidateQueries({ queryKey: KEYS.all })
-      toast({ title: 'Goal deleted', variant: 'success' })
+      toast({ title: 'Goal deleted successfully', variant: 'success' })
     },
-    onError: (err: { response?: { data?: { detail?: string } } }) => {
-      toast({
-        title: (err.response?.data?.detail as string) || 'Delete failed',
-        variant: 'destructive',
-      })
+    onError: (err: any) => {
+      const message = getErrorMessage(err, 'Delete failed')
+      toast({ title: message, variant: 'destructive' })
     },
   })
 }

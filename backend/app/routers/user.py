@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from business_logic.user import encode_account, get_balance
+from business_logic.user import encode_account, get_balance, show_budget
 from core.security.token import get_access_token
 from schemas import user as sche_user
 from typing import Annotated
@@ -29,6 +29,17 @@ async def get_user_balance(current_user: Annotated[sche_user.User, Depends(get_c
     return {"balance": await get_balance(current_user.id, user_repo)}
 
 
+@router.put("/set_budget")
+async def set_budget(request: sche_user.SetBudget, 
+                     current_user: Annotated[sche_user.User, Depends(get_current_user)] = None,
+                     user_repo: UserRepository = Depends(get_user_repo)):
+    updated_user = await user_repo.update_budget(current_user.id, request)
+    if not updated_user:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User not found")
+    return {"message": "Budget updated successfully", "budget": request}
 
 
-
+@router.get("/show_budget")
+async def show(current_user: Annotated[sche_user.User, Depends(get_current_user)] = None,
+                      user_repo: UserRepository = Depends(get_user_repo)):
+    return await show_budget(current_user.id, user_repo)

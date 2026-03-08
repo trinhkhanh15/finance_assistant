@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { BarChart3, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { usePieChart, useBehaviorChart } from '../hooks/use-dashboard-charts'
+import { usePieChart, useBehaviorChart, useSavingAmount } from '../hooks/use-dashboard-charts'
 import { PieChartCard } from '../components/PieChartCard'
 import { BehaviorChartCard } from '../components/BehaviorChartCard'
 import { IncomeCard } from '../components/IncomeCard'
+import { SavingAmountCard } from '../components/SavingAmountCard'
 import { getIncomeFromPie } from '../api'
 import type { ChartCycle } from '../api'
 
@@ -14,8 +15,10 @@ export function DashboardPage() {
 
   const { data: pieData, isLoading: pieLoading } = usePieChart(cycle)
   const { data: behaviorData, isLoading: behaviorLoading } = useBehaviorChart(cycle)
+  const { data: savingData, isLoading: savingLoading } = useSavingAmount()
 
   const income = getIncomeFromPie(pieData)
+  const savingAmount = savingData?.amount || 0
 
   return (
     <div className="p-6 space-y-6">
@@ -49,6 +52,8 @@ export function DashboardPage() {
       </div>
 
       <IncomeCard income={income} isLoading={pieLoading} />
+
+      <SavingAmountCard amount={savingAmount} isLoading={savingLoading} />
 
       <div className="grid gap-6 md:grid-cols-2">
         <PieChartCard

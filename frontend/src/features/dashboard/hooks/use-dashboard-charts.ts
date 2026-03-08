@@ -14,3 +14,10 @@ export function useBehaviorChart(cycle: ChartCycle) {
     queryFn: () => dashboardApi.getBehavior(cycle).then((r) => r.data),
   })
 }
+
+export function useSavingAmount() {
+  return useQuery({
+    queryKey: ['dashboard', 'saving', 'amount'],
+    queryFn: () => dashboardApi.getSavingAmount().then((r) => r.data),
+  })
+}

@@ -1672,3 +1672,127 @@ DETAIL:  Key (subscription_id)=(0) is not present in table "subscription".
 2026/03/02 12:13:28 - INFO - Deleted subscription ID=1 for user ID=2 successfully
 2026/03/02 12:16:31 - INFO - Deleted subscription ID=3 for user ID=2 successfully
 2026/03/02 12:20:00 - INFO - Deleted saving target ID=3 for user ID=2 successfully
+2026/03/04 21:13:11 - INFO - Created transaction ID=139 for user ID=2 successfully
+2026/03/04 21:14:00 - INFO - Deposit to target ID=2 for user ID=2 successfully.
+2026/03/04 21:14:19 - INFO - Deleted saving target ID=4 for user ID=2 successfully
+2026/03/04 21:45:12 - INFO - Created saving target ID=5 for user ID=2 successfully
+2026/03/04 21:45:18 - INFO - Deposit to target ID=5 for user ID=2 successfully.
+2026/03/04 21:46:11 - INFO - Deposit to target ID=5 for user ID=2 successfully.
+2026/03/04 21:48:26 - INFO - Deposit to target ID=5 for user ID=2 successfully.
+2026/03/04 21:49:09 - ERROR - Transaction ID=141 for user ID=2 failed: insufficient balance
+2026/03/04 21:49:09 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=5
+2026/03/04 21:49:41 - INFO - Created transaction ID=142 for user ID=2 successfully
+2026/03/04 21:49:41 - INFO - Deposit to target ID=5 for user ID=2 successfully.
+2026/03/04 21:52:14 - ERROR - Transaction ID=143 for user ID=2 failed: insufficient balance
+2026/03/04 21:52:14 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=5
+2026/03/04 21:53:11 - INFO - Created transaction ID=144 for user ID=2 successfully
+2026/03/04 21:53:27 - ERROR - The deposit amount must less than remaining amount needed for target ID=1.
+2026/03/04 21:53:55 - INFO - Created subscription ID=4 for user ID=2 - service 'con cặc' successfully
+2026/03/04 21:54:03 - INFO - Deleted subscription ID=4 for user ID=2 successfully
+2026/03/04 21:58:54 - INFO - Created transaction ID=145 for user ID=2 successfully
+2026/03/04 21:58:54 - INFO - Deposit to target ID=2 for user ID=2 successfully.
+2026/03/04 21:59:17 - INFO - Created transaction ID=146 for user ID=2 successfully
+2026/03/04 21:59:39 - INFO - Created transaction ID=147 for user ID=2 successfully
+2026/03/04 21:59:53 - ERROR - The deposit amount must less than remaining amount needed for target ID=5.
+2026/03/04 21:59:58 - ERROR - The deposit amount must less than remaining amount needed for target ID=5.
+2026/03/04 22:00:02 - ERROR - The deposit amount must less than remaining amount needed for target ID=5.
+2026/03/04 22:00:07 - ERROR - Transaction ID=148 for user ID=2 failed: insufficient balance
+2026/03/04 22:00:07 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=5
+2026/03/04 22:00:20 - INFO - Created transaction ID=149 for user ID=2 successfully
+2026/03/04 22:00:20 - INFO - Deposit to target ID=5 for user ID=2 successfully.
+2026/03/04 22:00:28 - INFO - Created transaction ID=150 for user ID=2 successfully
+2026/03/04 22:00:28 - INFO - Deposit to target ID=5 for user ID=2 successfully.
+2026/03/04 22:00:36 - ERROR - Transaction ID=151 for user ID=2 failed: insufficient balance
+2026/03/04 22:00:36 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=5
+2026/03/04 22:01:42 - ERROR - The deposit amount must less than remaining amount needed for target ID=1.
+2026/03/04 22:01:53 - INFO - Created transaction ID=152 for user ID=2 successfully
+2026/03/04 22:01:53 - INFO - Deposit to target ID=1 for user ID=2 successfully.
+2026/03/04 22:02:17 - INFO - Created transaction ID=153 for user ID=2 successfully
+2026/03/04 22:02:17 - INFO - Deposit to target ID=1 for user ID=2 successfully.
+2026/03/04 22:02:17 - INFO - Target ID=1 is completed.
+2026/03/04 22:12:58 - INFO - Withdraw from target ID=1 for user ID=2 successfully.
+2026/03/04 22:13:06 - ERROR - Target ID=1 for user ID=2 is already completed.
+2026/03/04 22:22:17 - ERROR - Target ID=1 for user ID=2 is already completed.
+2026/03/04 22:22:23 - INFO - Deleted saving target ID=1 for user ID=2 successfully
+2026/03/04 22:22:37 - INFO - Created saving target ID=6 for user ID=2 successfully
+2026/03/04 22:22:51 - ERROR - The deposit amount must less than remaining amount needed for target ID=6.
+2026/03/04 22:22:58 - INFO - Created transaction ID=155 for user ID=2 successfully
+2026/03/04 22:22:58 - INFO - Deposit to target ID=6 for user ID=2 successfully.
+2026/03/04 22:23:02 - INFO - Created transaction ID=156 for user ID=2 successfully
+2026/03/04 22:23:02 - INFO - Deposit to target ID=6 for user ID=2 successfully.
+2026/03/04 22:23:02 - INFO - Target ID=6 is completed.
+2026/03/04 22:23:07 - ERROR - Target ID=6 for user ID=2 is already completed.
+2026/03/04 22:23:12 - INFO - Withdraw from target ID=6 for user ID=2 successfully.
+2026/03/04 22:23:18 - ERROR - Target ID=6 for user ID=2 is already completed.
+2026/03/04 22:23:20 - ERROR - Target ID=6 for user ID=2 is already completed.
+2026/03/04 22:23:20 - ERROR - Target ID=6 for user ID=2 is already completed.
+2026/03/04 22:23:21 - ERROR - Target ID=6 for user ID=2 is already completed.
+2026/03/04 22:23:21 - ERROR - Target ID=6 for user ID=2 is already completed.
+2026/03/04 22:23:21 - ERROR - Target ID=6 for user ID=2 is already completed.
+2026/03/04 22:23:21 - ERROR - Target ID=6 for user ID=2 is already completed.
+2026/03/04 22:23:21 - ERROR - Target ID=6 for user ID=2 is already completed.
+2026/03/04 22:23:21 - ERROR - Target ID=6 for user ID=2 is already completed.
+2026/03/04 22:31:06 - INFO - Deleted saving target ID=6 for user ID=2 successfully
+2026/03/04 22:31:19 - INFO - Created saving target ID=7 for user ID=2 successfully
+2026/03/04 22:31:23 - INFO - Created transaction ID=158 for user ID=2 successfully
+2026/03/04 22:31:23 - INFO - Deposit to target ID=7 for user ID=2 successfully.
+2026/03/04 22:31:28 - INFO - Created transaction ID=159 for user ID=2 successfully
+2026/03/04 22:31:28 - INFO - Deposit to target ID=7 for user ID=2 successfully.
+2026/03/04 22:31:28 - INFO - Target ID=7 is completed.
+2026/03/04 22:31:32 - INFO - Withdraw from target ID=7 for user ID=2 successfully.
+2026/03/04 22:31:36 - ERROR - Target ID=7 for user ID=2 is already completed.
+2026/03/04 22:32:32 - INFO - Deleted saving target ID=7 for user ID=2 successfully
+2026/03/04 22:32:43 - INFO - Created saving target ID=8 for user ID=2 successfully
+2026/03/04 22:32:47 - ERROR - The deposit amount must less than remaining amount needed for target ID=8.
+2026/03/04 22:32:50 - INFO - Created transaction ID=161 for user ID=2 successfully
+2026/03/04 22:32:50 - INFO - Deposit to target ID=8 for user ID=2 successfully.
+2026/03/04 22:32:56 - INFO - Withdraw from target ID=8 for user ID=2 successfully.
+2026/03/04 22:33:00 - INFO - Created transaction ID=163 for user ID=2 successfully
+2026/03/04 22:33:00 - INFO - Deposit to target ID=8 for user ID=2 successfully.
+2026/03/04 22:33:00 - INFO - Target ID=8 is completed.
+2026/03/04 22:33:03 - INFO - Withdraw from target ID=8 for user ID=2 successfully.
+2026/03/04 22:33:06 - INFO - Created transaction ID=165 for user ID=2 successfully
+2026/03/04 22:33:06 - INFO - Deposit to target ID=8 for user ID=2 successfully.
+2026/03/04 22:33:06 - INFO - Target ID=8 is completed.
+2026/03/05 08:01:59 - INFO - Deleted saving target ID=8 for user ID=2 successfully
+2026/03/05 08:03:39 - INFO - Created saving target ID=9 for user ID=2 successfully
+2026/03/05 08:03:43 - INFO - Created transaction ID=166 for user ID=2 successfully
+2026/03/05 08:03:43 - INFO - Deposit to target ID=9 for user ID=2 successfully.
+2026/03/05 08:03:47 - INFO - Created transaction ID=167 for user ID=2 successfully
+2026/03/05 08:03:47 - INFO - Deposit to target ID=9 for user ID=2 successfully.
+2026/03/05 08:03:47 - INFO - Target ID=9 is completed.
+2026/03/05 08:03:59 - INFO - Withdraw from target ID=9 for user ID=2 successfully.
+2026/03/05 08:04:07 - INFO - Created transaction ID=169 for user ID=2 successfully
+2026/03/05 08:04:07 - INFO - Deposit to target ID=9 for user ID=2 successfully.
+2026/03/05 08:04:07 - INFO - Target ID=9 is completed.
+2026/03/05 08:07:04 - ERROR - The deposit amount must less than remaining amount needed for target ID=2.
+2026/03/05 08:07:23 - ERROR - Target ID=9 for user ID=2 is already completed.
+2026/03/05 08:07:32 - ERROR - Transaction ID=170 for user ID=2 failed: insufficient balance
+2026/03/05 08:07:32 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=2
+2026/03/05 08:11:00 - ERROR - Transaction ID=171 for user ID=2 failed: insufficient balance
+2026/03/05 08:11:00 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=2
+2026/03/05 08:21:33 - ERROR - Transaction ID=172 for user ID=2 failed: insufficient balance
+2026/03/05 08:21:33 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=2
+2026/03/05 08:21:40 - ERROR - Transaction ID=173 for user ID=2 failed: insufficient balance
+2026/03/05 08:21:40 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=2
+2026/03/05 08:21:56 - ERROR - Transaction ID=174 for user ID=2 failed: insufficient balance
+2026/03/05 08:21:56 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=2
+2026/03/05 08:22:17 - ERROR - Transaction ID=175 for user ID=2 failed: insufficient balance
+2026/03/05 08:22:17 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=2
+2026/03/05 08:26:27 - ERROR - Transaction ID=176 for user ID=2 failed: insufficient balance
+2026/03/05 08:26:27 - ERROR - Balance of user ID=2 is not enough for deposit to target ID=2
+2026/03/07 16:36:41 - INFO - Created saving target ID=1 for user ID=1 successfully
+2026/03/07 16:41:04 - ERROR - Transaction ID=1 for user ID=1 failed: insufficient balance
+2026/03/07 16:43:57 - INFO - Created transaction ID=2 for user ID=1 successfully
+2026/03/07 16:45:16 - INFO - Created transaction ID=3 for user ID=1 successfully
+2026/03/07 16:45:16 - INFO - Deposit to target ID=1 for user ID=1 successfully.
+2026/03/07 17:23:47 - ERROR - Transaction ID=4 for user ID=1 failed: insufficient balance
+2026/03/07 17:26:47 - ERROR - Transaction ID=5 for user ID=1 failed: insufficient balance
+2026/03/07 17:26:59 - INFO - Created transaction ID=6 for user ID=1 successfully
+2026/03/07 17:27:20 - INFO - Created transaction ID=7 for user ID=1 successfully
+2026/03/07 17:28:17 - INFO - Created transaction ID=8 for user ID=1 successfully
+2026/03/07 17:28:31 - INFO - Created transaction ID=9 for user ID=1 successfully
+2026/03/07 17:29:00 - INFO - Created transaction ID=10 for user ID=1 successfully
+2026/03/07 17:29:19 - INFO - Created transaction ID=11 for user ID=1 successfully
+2026/03/07 18:34:25 - INFO - Retrieved financial preference data for user 1
+2026/03/07 18:36:43 - INFO - Retrieved financial preference data for user 1

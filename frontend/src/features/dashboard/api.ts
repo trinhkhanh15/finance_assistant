@@ -10,12 +10,19 @@ const PIE_META_KEYS = ['all_spending', 'start_date', 'end_date', 'income']
 /** Behavior: { "YYYY-MM-DD": amount } */
 export type BehaviorResponse = Record<string, number>
 
+export interface SavingAmountResponse {
+  amount: number
+}
+
 export const dashboardApi = {
   getPieChart: (cycle: ChartCycle) =>
     api.get<PieChartResponse>(`/transaction/view_pie_chart/${cycle}`),
 
   getBehavior: (cycle: ChartCycle) =>
     api.get<BehaviorResponse>(`/transaction/view_behavior/${cycle}`),
+
+  getSavingAmount: () =>
+    api.get<SavingAmountResponse>(`/saving/all_amount`),
 }
 
 /** Extract income từ response */

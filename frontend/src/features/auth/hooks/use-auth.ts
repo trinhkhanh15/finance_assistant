@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
-import { authApi } from '../api'
+import { authApi, type SignupRequest } from '../api'
 import { useAuthStore } from '@/store/auth-store'
 import { useToast } from '@/hooks/use-toast'
 
@@ -40,7 +40,7 @@ export function useSignup() {
   const { toast } = useToast()
 
   return useMutation({
-    mutationFn: (data: { username: string; password: string }) =>
+    mutationFn: (data: SignupRequest) =>
       authApi.signup(data).then((r) => r.data),
     onSuccess: () => {
       toast({ title: 'Signed up successfully. Please log in.', variant: 'success' })

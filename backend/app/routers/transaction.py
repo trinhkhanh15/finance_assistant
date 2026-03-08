@@ -73,4 +73,3 @@ async def get_behavior_data(cycle: str,
     user_id = current_user.id
     return await get_transaction_behavior(user_id, cycle, transaction_repo,)
 
-

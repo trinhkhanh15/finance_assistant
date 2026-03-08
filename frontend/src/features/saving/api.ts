@@ -25,7 +25,7 @@ export interface DepositRequest {
 }
 
 export const savingApi = {
-  getCurrent: () => api.get<Target[]>('/saving/show_current').then((r) => r.data),
+  //getCurrent: () => api.get<Target[]>('/saving/show_current').then((r) => r.data),
   getAll: () => api.get<Target[]>('/saving/show_all').then((r) => r.data),
   create: (data: CreateTargetRequest) => api.post<Target>('/saving/create', data),
   deposit: (goalId: number, data: DepositRequest) =>
