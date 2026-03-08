@@ -12,6 +12,10 @@ export function BudgetPage() {
 
   const isLoading = budgetLoading || spendingLoading
 
+  const hasBudget =
+    budgetData &&
+    Object.values(budgetData).some((v) => (v as number) > 0)
+
   return (
     <div className="p-6 space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -23,15 +27,28 @@ export function BudgetPage() {
         </div>
         <Button onClick={() => setDialogOpen(true)}>
           <Plus className="h-4 w-4" />
-          <span className="ml-2">Set Budget</span>
+          <span className="ml-2">{hasBudget ? 'Edit Budget' : 'Set Budget'}</span>
         </Button>
       </div>
 
-      <BudgetProgress
-        budgetData={budgetData}
-        spendingData={spendingData}
-        isLoading={isLoading}
-      />
+      {!isLoading && !hasBudget ? (
+        <div className="flex flex-col items-center justify-center rounded-xl border border-dashed p-12 text-center gap-3">
+          <p className="text-lg font-medium">No budget set yet</p>
+          <p className="text-sm text-muted-foreground">
+            Click "Set Budget" to define your monthly spending limits.
+          </p>
+          <Button onClick={() => setDialogOpen(true)}>
+            <Plus className="h-4 w-4 mr-2" />
+            Set Budget
+          </Button>
+        </div>
+      ) : (
+        <BudgetProgress
+          budgetData={budgetData}
+          spendingData={spendingData}
+          isLoading={isLoading}
+        />
+      )}
 
       <BudgetDialog
         open={dialogOpen}

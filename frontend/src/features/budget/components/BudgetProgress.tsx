@@ -10,8 +10,6 @@ const BUDGET_CATEGORIES = [
   { key: 'other_budget', label: 'Other', apiKey: 'other', color: 'bg-gray-500' },
 ] as const
 
-const METADATA_KEYS = ['income', 'all_spending', 'start_date', 'end_date']
-
 interface BudgetProgressProps {
   budgetData: BudgetData | undefined
   spendingData: Record<string, number> | undefined
@@ -56,30 +54,36 @@ export function BudgetProgress({ budgetData, spendingData, isLoading }: BudgetPr
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <div className="space-y-1">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">{spending.toLocaleString('en-US')}</span>
-                  <span className={isOverBudget ? 'text-destructive font-medium' : 'text-foreground'}>
-                    {budget.toLocaleString('en-US')}
-                  </span>
-                </div>
-                <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-                  <div
-                    className={`h-full transition-all duration-300 rounded-full ${
-                      isOverBudget ? 'bg-destructive' : color
-                    }`}
-                    style={{ width: `${progress}%` }}
-                  />
-                </div>
-              </div>
-              <div className="flex justify-between text-xs text-muted-foreground">
-                <span>{progress.toFixed(0)}%</span>
-                {isOverBudget && (
-                  <span className="text-destructive font-medium">
-                    +{(spending - budget).toLocaleString('en-US')} over
-                  </span>
-                )}
-              </div>
+              {budget === 0 ? (
+                <p className="text-sm text-muted-foreground italic">Not set</p>
+              ) : (
+                <>
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">{spending.toLocaleString('en-US')}</span>
+                      <span className={isOverBudget ? 'text-destructive font-medium' : 'text-foreground'}>
+                        {budget.toLocaleString('en-US')}
+                      </span>
+                    </div>
+                    <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+                      <div
+                        className={`h-full transition-all duration-300 rounded-full ${
+                          isOverBudget ? 'bg-destructive' : color
+                        }`}
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-between text-xs text-muted-foreground">
+                    <span>{progress.toFixed(0)}%</span>
+                    {isOverBudget && (
+                      <span className="text-destructive font-medium">
+                        +{(spending - budget).toLocaleString('en-US')} over
+                      </span>
+                    )}
+                  </div>
+                </>
+              )}
             </CardContent>
           </Card>
         )
