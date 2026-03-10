@@ -71,14 +71,14 @@ export function DashboardPage() {
       {!pieLoading && !behaviorLoading && (!pieData?.length) && (!behaviorData?.length) && (
         <Card className="border-dashed">
           <CardHeader>
-            <CardTitle className="text-base">No data yet</CardTitle>
+            <CardTitle className="text-base">No data yet?</CardTitle>
             <CardDescription>
               Add transactions manually or import CSV from the Transactions page to see charts.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              The spending breakdown chart shows categories. The trend chart shows weekly (bars) or monthly (line).
+              The spending breakdown chart shows categories. The trend chart shows weekly or monthly chart.
             </p>
           </CardContent>
         </Card>
