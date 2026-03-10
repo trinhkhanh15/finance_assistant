@@ -71,16 +71,15 @@ async def deposit_to_target(goal_id: int, amount: float, user_id: int, saving_re
     if updated_goal.status == "Completed" and previous_status != "Completed":
         msg = f"Target ID={goal_id} is completed."
         log_activity(msg, "info")
-        # await withdraw_target(goal_id, updated_goal.current_amount, user_id, saving_repo, user_repo, transaction_repo)
-        # -> consider logic right here
 
     return updated_goal
 
 
-async def delete_target(goal_id: int, user_id: int, saving_repo: SavingRepository):
-    await validate_target(goal_id, user_id, saving_repo)
+async def delete_target(goal_id: int, user_id: int, user_repo: UserRepository, saving_repo: SavingRepository):
+    target = await validate_target(goal_id, user_id, saving_repo)
     result = await saving_repo.delete(goal_id)
     if result:
+        user_repo.update_balance(user_id, target.current_amount)
         msg = f"Deleted saving target ID={goal_id} for user ID={user_id} successfully"
         log_activity(msg, "info")
     return result
