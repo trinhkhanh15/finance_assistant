@@ -12,10 +12,11 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 warnings.filterwarnings("ignore")
 
-MODEL_PATH_REGRET = "backend/app/AI/ML/models/StackingEnsemble_regret_lv.pkl"
-MODEL_PATH_TOLERANCE = "backend/app/AI/ML/models/StackingEnsemble_tolerance_lv.pkl"
-TEST_PATH = "finance_behavior_dataset/test.csv" # Thêm đường dẫn vào
-OUTPUT_PATH = "backend/app/AI/ML"
+MODEL_PATH_REGRET = "kaggle/working/mlruns/1/models/FINAL_StackingEnsemble__regret_level/artifacts/StackingEnsemble_regret_lv.pkl"
+MODEL_PATH_TOLERANCE = "kaggle/working/mlruns/1/models/FINAL_StackingEnsemble__tolerance_level/artifacts/StackingEnsemble_tolerance_lv.pkl"
+TEST_PATH = "finance_behavior_dataset/test.csv"
+TRAIN_PATH = "finance_behavior_dataset/train.csv"
+OUTPUT_PATH = "target_output.json"
 
 CATEGORIES = ["food", "shopping", "entertainment", "investment", "transport", "subscription", "other"]
 MONTHS = ["m0", "m1", "m2"]
@@ -60,16 +61,14 @@ def load_model(model_path):
     return joblib.load(Path(model_path))
 
 
-def load_test_data(test_path):
+def load_train_data(train_path):
+    return pd.read_csv(train_path)
+
+
+def load_test_data(test_path, time_spent_mean):
     df = pd.read_csv(test_path)
-
-    for col in df.select_dtypes(include=[np.number]).columns:
-        if df[col].isna().any():
-            df[col] = df[col].fillna(df[col].median())
-
-    for col in df.select_dtypes(include=['object']).columns:
-        if df[col].isna().any():
-            df[col] = df[col].fillna("Unknown")
+    df["time_spent_considering"] = float(time_spent_mean)
+    df["payment_method"] = "cash"
 
     return df
 
@@ -143,14 +142,7 @@ def feature_engineering(df):
     return df
 
 
-def apply_preprocessing(df):
-    for col in NUMERICAL_COLS:
-        if col not in df.columns:
-            df[col] = 0.0
-    for col in CATEGORICAL_COLS:
-        if col not in df.columns:
-            df[col] = "Unknown"
-
+def build_preprocessor():
     preprocessor = ColumnTransformer(
         transformers=[
             ("num", Pipeline([("imputer", SimpleImputer(strategy="median")), ("scaler", StandardScaler())]), NUMERICAL_COLS),
@@ -160,10 +152,10 @@ def apply_preprocessing(df):
         ],
         remainder="drop",
     )
-    return preprocessor.fit_transform(df)
+    return preprocessor
 
 
-def adjust_predictions(regret_pred, tolerance_pred, adjustment=0.1):
+def adjust_predictions(regret_pred, tolerance_pred, adjustment=0.25):
     regret_adjusted = np.clip(regret_pred + adjustment * np.std(regret_pred), 0.0, 1.0)
     tolerance_adjusted = np.clip(tolerance_pred - adjustment * np.std(tolerance_pred), 0.0, 1.0)
     return regret_adjusted, tolerance_adjusted
@@ -176,15 +168,21 @@ def save_json(regret_pred, tolerance_pred, output_path):
         json.dump(results, f, indent=2)
 
 
-def main():
+def pipeline():
     model_regret = load_model(MODEL_PATH_REGRET)
     model_tolerance = load_model(MODEL_PATH_TOLERANCE)
 
-    df = load_test_data(TEST_PATH)
+    train_df = load_train_data(TRAIN_PATH)
+    time_spent_mean = train_df["time_spent_considering"].mean()
 
+    df = load_test_data(TEST_PATH, time_spent_mean)
+
+    train_df = feature_engineering(train_df)
     df = feature_engineering(df)
 
-    X = apply_preprocessing(df)
+    preprocessor = build_preprocessor()
+    preprocessor.fit(train_df)
+    X = preprocessor.transform(df)
 
     regret_pred = model_regret.predict(X)
     tolerance_pred = model_tolerance.predict(X)
@@ -195,4 +193,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    pipeline()
