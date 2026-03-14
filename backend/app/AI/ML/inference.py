@@ -12,10 +12,12 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 warnings.filterwarnings("ignore")
 
-MODEL_PATH_REGRET = "kaggle/working/mlruns/1/models/FINAL_StackingEnsemble__regret_level/artifacts/StackingEnsemble_regret_lv.pkl"
-MODEL_PATH_TOLERANCE = "kaggle/working/mlruns/1/models/FINAL_StackingEnsemble__tolerance_level/artifacts/StackingEnsemble_tolerance_lv.pkl"
-TEST_PATH = "finance_behavior_dataset/test.csv"
-TRAIN_PATH = "finance_behavior_dataset/train.csv"
+BASE_DIR = Path(__file__).parent
+MODEL_PATH_REGRET = BASE_DIR / "models" / "StackingEnsemble_regret_lv.pkl"
+MODEL_PATH_TOLERANCE = BASE_DIR / "models" / "StackingEnsemble_tolerance_lv.pkl"
+PREPROCESSOR_PATH = BASE_DIR / "models" / "preprocessor.pkl"
+METADATA_PATH = BASE_DIR / "models" / "inference_metadata.json"
+TEST_PATH = BASE_DIR / "dataset" / "test.csv"
 OUTPUT_PATH = "target_output.json"
 
 CATEGORIES = ["food", "shopping", "entertainment", "investment", "transport", "subscription", "other"]
@@ -61,8 +63,13 @@ def load_model(model_path):
     return joblib.load(Path(model_path))
 
 
-def load_train_data(train_path):
-    return pd.read_csv(train_path)
+def load_preprocessor(preprocessor_path=PREPROCESSOR_PATH):
+    return joblib.load(preprocessor_path)
+
+
+def load_metadata(metadata_path=METADATA_PATH):
+    with open(metadata_path, encoding="utf-8") as f:
+        return json.load(f)
 
 
 def load_test_data(test_path, time_spent_mean):
@@ -172,16 +179,13 @@ def pipeline():
     model_regret = load_model(MODEL_PATH_REGRET)
     model_tolerance = load_model(MODEL_PATH_TOLERANCE)
 
-    train_df = load_train_data(TRAIN_PATH)
-    time_spent_mean = train_df["time_spent_considering"].mean()
+    preprocessor = load_preprocessor()
+    metadata = load_metadata()
+    time_spent_mean = metadata["time_spent_mean"]
 
     df = load_test_data(TEST_PATH, time_spent_mean)
-
-    train_df = feature_engineering(train_df)
     df = feature_engineering(df)
 
-    preprocessor = build_preprocessor()
-    preprocessor.fit(train_df)
     X = preprocessor.transform(df)
 
     regret_pred = model_regret.predict(X)
