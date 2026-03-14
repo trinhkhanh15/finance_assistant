@@ -11,3 +11,8 @@ greenlet
 pandas
 asyncpg
 passlib
+joblib
+numpy
+scikit-learn
+xgboost
+catboost
